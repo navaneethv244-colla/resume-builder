@@ -3,6 +3,11 @@ import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom'
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import { Directions } from '@mui/icons-material';
 
 const Home = () => {
   return (
@@ -81,22 +86,147 @@ const Home = () => {
         <Typography variant='h5' sx={{textAlign:'center',fontWeight:'bold'}}>
             Testimony
         </Typography>
-        <Stack direction="row" spacing={4} alignItems="center">
-              <div style={{width:'50%'}}>
+        <Stack direction="row" spacing={20} alignItems="center">
+              <div style={{width:'60%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
                     <Typography variant='h6' sx={{fontWeight:'bold'}}>
                           Trusted by professionals worldwide.
                     </Typography>
-                    <Typography variant='body1'>
+                    <Typography variant='body1' sx={{textAlign:'justify'}}>
                           At rBuilder, we don't just help you create résumés — we help you land the job. Whether you're a seasoned professional or just starting out, our tools are designed to get results.
                     </Typography>
-                    <Typography variant='body1'>
+                    <Typography variant='body1'sx={{textAlign:'justify'}}>
                           In fact, users who used rBuilder reported getting hired an average of 48 days faster.
                     </Typography>
-                    <Typography variant='body1'>
+                    <Typography variant='body1' sx={{textAlign:'justify'}}>
                       Join thousands of job-seekers who've fast-tracked their careers with a résumé that truly stands out.
                     </Typography>
               </div>
-              <div></div>
+              <div style={{width:'30%'}}>
+                 <Box sx={{ width: '100%' }}>
+  <Grid container rowSpacing={2} columnSpacing={3}>
+
+    <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXCFlTKJVh1otOTJKGKUiyOIYtzY5VUcZmF1GD_7p6kQ&s=10"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+
+   <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrpiLwwR4kmaQ4xVDx24BWPvXDm9BS9jmokchS7suRgg&s=10"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+ <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjk39SYfrN4IeneaSOuYd0dTuQLUtkjngct6_IcUg07w&s=10"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+   <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDxS4Wig0GydZxKpbR8BpScW4NTBHPAqJP0_dCva82pA&s=10"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+    <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3CVtuCotE6_3qdMOH-uc-0Kit5hOlMlcC2LOQR1_yBw&s=10"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+    <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM2-MOc9GEX9Xm0b-_i82ANHouYvvy4hrZRwjg_L6W5w&s=10"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+    <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSnFVYxZmhNDkAcE9NyEdyAA8cvyfpbswLENF4luQXxg&s=10"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+    <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCfCNEXzvbJo_JIq0ztx4gAEBbjEZRImtzEX3jwe2Yxw&s=10"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+    <Grid size={4}>
+      <Paper sx={{ overflow: 'hidden', height:'100%' }}>
+        <img
+          src="https://t3.ftcdn.net/jpg/19/43/61/78/360_F_1943617882_OtI32xAnfk7LmKkX6I24Rltm54eYJIKs.jpg"
+          alt="User"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </Paper>
+    </Grid>
+  </Grid>
+  
+</Box>
+              </div>
         </Stack>
       </section>
     </div>

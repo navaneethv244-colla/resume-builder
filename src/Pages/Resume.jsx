@@ -7,13 +7,14 @@ import SummarizeIcon from '@mui/icons-material/Summarize';
 import Container from '@mui/material/Container';
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
 import Button from '@mui/material/Button';
+import {Link} from 'react-router-dom'
 const Resume = () => {
   return (
     <div>
       <Typography variant="h6" sx={{ textAlign: 'center', mb: 3 ,mt: 5}}>
         Create an ATS Friendly Resume in Minutes with AI
       </Typography>
-      
+
       <Stack direction="row" spacing={50}>
         <Box
       sx={{
@@ -69,7 +70,9 @@ const Resume = () => {
     </Box>
       </Stack>
      <Box sx={{display:'flex',justifyContent:'center'}}>
-         <Button variant="contained" sx={{background:'brown'}}>Let`s start</Button>
+        <Link to={'/resume-details'}>
+             <Button variant="contained" sx={{background:'brown'}}>Let`s start</Button>
+        </Link>
      </Box>
     </div>
   )
