@@ -65,14 +65,12 @@ const Edit = () => {
           <TextField id="standard-basic" label="Bachelors Degree" variant="standard" />
           <TextField id="standard-basic" label="College/University Name" variant="standard" />
           <TextField id="standard-basic" label="Year of Graduation" variant="standard" />
-          
           <Typography variant='h4' sx={{fontWeight:'bold'}}>
             Skills
           </Typography>
           <Stack direction="row" spacing={2} sx={{display:'flex',alignItems:'center'}}>
               <TextField id="outlined-basic" label="Add New Skill" variant="outlined"/>
               <Button variant="outlined" sx={{width:'10px',height:'40px',color:'brown'}}>Add</Button>
-
           </Stack>
         </Box>
         </Paper>

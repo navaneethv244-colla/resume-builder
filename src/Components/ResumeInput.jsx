@@ -6,11 +6,19 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { useState } from 'react';
+
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 const steps = ['Basic Information', 'Contact details', 'Education Details','Review & submit'];
 
-const ResumeInput = () => {
+const ResumeInput = ({setresumeDetails,resumeDetails}) => {
+ 
    const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -92,9 +100,24 @@ const ResumeInput = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="standard-basic" label="FullName" variant="standard" />
-      <TextField id="standard-basic" label="Location" variant="standard" />
-      <TextField id="standard-basic" label="Choose Job Title" variant="standard" />
+      <TextField value={resumeDetails.name} onChange={(e)=>setresumeDetails({...resumeDetails,name:e.target.value})} id="standard-basic" label="FullName" variant="standard" />
+      <TextField value={resumeDetails.location} onChange={(e)=>setresumeDetails({...resumeDetails,location:e.target.value})} id="standard-basic" label="Location" variant="standard" />
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          // value={age}
+          // onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
 
 
       </Box>
@@ -110,9 +133,9 @@ const ResumeInput = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="standard-basic" label="Email" variant="standard" />
-      <TextField id="standard-basic" label="Contact Number" variant="standard" />
-      <TextField id="standard-basic" label="Github Link" variant="standard" />
+      <TextField value={resumeDetails.email} onChange={(e)=>setresumeDetails({...resumeDetails,email:e.target.value})} id="standard-basic" label="Email" variant="standard" />
+      <TextField value={resumeDetails.contactNumber} onChange={(e)=>setresumeDetails({...resumeDetails,contactNumber:e.target.value})} id="standard-basic" label="Contact Number" variant="standard" />
+      <TextField value={resumeDetails.github} onChange={(e)=>setresumeDetails({...resumeDetails,github:e.target.value})} id="standard-basic" label="Github Link" variant="standard" />
 
 
       </Box>
@@ -128,9 +151,9 @@ const ResumeInput = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="standard-basic" label="Bachelors Degree" variant="standard" />
-      <TextField id="standard-basic" label="College/University Name" variant="standard" />
-      <TextField id="standard-basic" label="Year of Graduation" variant="standard" />
+      <TextField value={resumeDetails.degree} onChange={(e)=>setresumeDetails({...resumeDetails,degree:e.target.value})} id="standard-basic" label="Bachelors Degree" variant="standard" />
+      <TextField value={resumeDetails.college} onChange={(e)=>setresumeDetails({...resumeDetails,college:e.target.value})} id="standard-basic" label="College/University Name" variant="standard" />
+      <TextField value={resumeDetails.year} onChange={(e)=>setresumeDetails({...resumeDetails,year:e.target.value})} id="standard-basic" label="Year of Graduation" variant="standard" />
 
 
       </Box>

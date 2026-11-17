@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ResumeInput from '../Components/ResumeInput'
 import Preview from '../Components/Preview'
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 const Info = () => {
+   const [resumeDetails, setresumeDetails] = useState({
+      name: "",
+      location: "",
+      jobTitle: "",
+      email: "",
+      contactNumber: "",
+      linkedIn: "",
+      github: "",
+      degree: "",
+      college: "",
+      year: "",
+      summary: "",
+      skills: [],
+    })
   return (
      <Stack
   direction="row"
@@ -15,14 +29,13 @@ const Info = () => {
   }}
 >
   <Box sx={{width:'40%',padding:'10px'}}>
-    <ResumeInput />
+    <ResumeInput  resumeDetails={resumeDetails}
+    setresumeDetails={setresumeDetails}/>
   </Box>
-
   <Box sx={{width:'40%'}}>
-    <Preview />
+    <Preview  resumeDetails={resumeDetails}/>
   </Box>
 </Stack>
   )
 }
-
 export default Info

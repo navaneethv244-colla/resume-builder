@@ -4,17 +4,17 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper';
 
-const Preview = () => {
+const Preview = ({resumeDetails}) => {
   return (
     <Box sx={{ width: '100%', p: 3 }}>
       <Paper elevation={3} sx={{padding:'10px'}}>
-                <h2>Nadhil</h2>
+                <h2>{resumeDetails.name}</h2>
 
-      <p className='fs-6 lh-1'>Phone:3456789012</p>
-      <p className='fs-6 lh-1'>Email:nadhil@gmail.com</p>
-      <p className='fs-6 lh-1'>Linkedin:http</p>
-      <p className='fs-6 lh-1'>Github:http</p>
-      <p className='fs-6 lh-1'>Location:http</p>
+      <p className='fs-6 lh-1'>Phone:{resumeDetails.phone}</p>
+      <p className='fs-6 lh-1'>Email:{resumeDetails.email}</p>
+      <p className='fs-6 lh-1'>Linkedin:{resumeDetails.linkedIn}</p>
+      <p className='fs-6 lh-1'>Github:{resumeDetails.github}</p>
+      <p className='fs-6 lh-1'>Location:{resumeDetails.location}</p>
 
       <Divider sx={{ bgcolor: 'black', my: 3 }} />
 
@@ -32,9 +32,9 @@ const Preview = () => {
       <Divider sx={{ bgcolor: 'black', my: 3 }} />
 
       <h4>Education</h4>
-      <p className='fs-6 lh-1'>Bachelor's Degree in MCA</p>
-      <p className='fs-6 lh-1'>University/College Name:KANNUR</p>
-      <p className='fs-6 lh-1'>Year of Graduation:2021</p>
+      <p className='fs-6 lh-1'>{resumeDetails.degree}</p>
+      <p className='fs-6 lh-1'>{resumeDetails.college}</p>
+      <p className='fs-6 lh-1'>{resumeDetails.year}</p>
       </Paper>
 
     </Box>
