@@ -10,7 +10,7 @@ const axiosServices = async(httpMethod,url,reqBody)=>{
     }
     catch(err){
         console.log('err',err);
-        return err
+        
     }
 }
 export default axiosServices

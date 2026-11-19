@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,6 +11,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { displayResume } from '../services/apiServices';
+import { Button } from '@mui/material';
+import { deleteResumeAPI } from '../services/apiServices';
 
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
@@ -24,6 +27,29 @@ import Paper from '@mui/material/Paper';
 //   createData('Gingerbread', 356, 16.0, 49, 3.9),
 // ];
 const Saved = () => {
+  const [allResumes,setAllResumes]=useState([])
+  const getAllResumes = async()=>{
+    const res = await displayResume()  
+    console.log(res)
+    setAllResumes(res.data)
+    }
+    const deleteResume=async(id)=>{
+      try{
+        const res = await deleteResumeAPI(id)
+        console.log(res);
+        if(res.status==200){
+          alert('Deleted sucessfully')
+          getAllResumes()
+        }
+      }
+      catch(err){
+        console.log(err);
+        
+      }
+    }
+    useEffect(()=>{
+      getAllResumes()
+    },[])
   return (
     <div>
      <Typography variant='h3' sx={{textAlign:'center',mt:'10px'}}>
@@ -46,15 +72,21 @@ const Saved = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-            <TableRow
+           {
+            allResumes.length>0?
+            allResumes.map(item=>(
+               <TableRow key={item.id}
             >
               <TableCell component="th" scope="row">
-              3245
+              234
               </TableCell>
-             <TableCell align="right"><Link>Navaneeth</Link></TableCell>
-              <TableCell align="right">Full stack developer</TableCell>
-              <TableCell align="right">delete</TableCell>
+             <TableCell align="right"><Link to={`/resume/:${item.id}`}>{item.name}</Link></TableCell>
+              <TableCell align="right">{item.jobTitle}</TableCell>
+              <TableCell align="right"><Button onClick={()=>deleteResume(item.id)}>delete</Button></TableCell>
             </TableRow>
+            ))
+            :'No data'
+           }
         </TableBody>
       </Table>
     </TableContainer>

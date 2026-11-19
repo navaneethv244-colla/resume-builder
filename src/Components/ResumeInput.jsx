@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react'
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -6,20 +6,24 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
-
-
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import jobRole from '../assets/jobRole.json'
+import summaries from '../assets/summaries.json'
+import jobSkills from '../assets/jobSkills.json'
+import { addResumeAPI } from '../services/apiServices';
+import { useNavigate } from 'react-router-dom'
 
 
-const steps = ['Basic Information', 'Contact details', 'Education Details','Review & submit'];
+const steps = ['Basic Information', 'Contact Details', 'Education Details','Review & Submit'];
 
-const ResumeInput = ({setresumeDetails,resumeDetails}) => {
- 
-   const [activeStep, setActiveStep] = React.useState(0);
+export default function ResumeInput({resumeDetails,setresumeDetails}) {
+
+  const navigate = useNavigate()
+  
+  const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepOptional = React.useCallback((step) => {
@@ -63,8 +67,7 @@ const ResumeInput = ({setresumeDetails,resumeDetails}) => {
   const handleReset = () => {
     setActiveStep(0);
   };
-
-  const previousActiveStepRef = React.useRef(activeStep);
+   const previousActiveStepRef = React.useRef(activeStep);
   const resetButtonRef = React.useRef(null);
   const nextButtonRef = React.useRef(null);
 
@@ -90,94 +93,101 @@ const ResumeInput = ({setresumeDetails,resumeDetails}) => {
   }, [activeStep, isStepOptional]);
 
   const renderStepsContent=(stepsCount)=>{
-    switch(stepsCount){
-        case 0: return(
-          <div>
-            <h1>basic informations</h1>
-           <Box
-      component="form"
-      sx={{ '& > :not(style)': { m: 1, width: '25ch',display:'flex', flexDirection:'column' } }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField value={resumeDetails.name} onChange={(e)=>setresumeDetails({...resumeDetails,name:e.target.value})} id="standard-basic" label="FullName" variant="standard" />
-      <TextField value={resumeDetails.location} onChange={(e)=>setresumeDetails({...resumeDetails,location:e.target.value})} id="standard-basic" label="Location" variant="standard" />
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+   switch(stepsCount){
+      case 0: return(
+        <div>
+          <h1>Basic Information</h1>
+          
+      <TextField value={resumeDetails.name} onChange={(e)=>setresumeDetails({...resumeDetails,name:e.target.value})} sx={{width:'750px'}} id="outlined-basic" label="FullName" variant="standard" width='200px' /> <br />
+      <TextField value={resumeDetails.location} onChange={(e)=>setresumeDetails({...resumeDetails,location:e.target.value})} sx={{width:'750px'}} id="filled-basic" label="Location" variant="standard" /> <br />
+      {/* <TextField value={resumeDetails.jobTitle} onChange={(e)=>setresumeDetails({...resumeDetails,jobTitle:e.target.value})} sx={{width:'750px'}}  id="standard-basic" label="Job-Title" variant="standard" /> */}
+
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Job Title</InputLabel>
         <Select
+          sx={{width:'750px'}}
+          value={resumeDetails.jobTitle}
+          onChange={(e)=>setresumeDetails({...resumeDetails,jobTitle:e.target.value})}
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           // value={age}
           // onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {
+            jobRole.jobRoles.map(item=>(
+              <MenuItem value={item}>
+                <em>{item}</em>
+              </MenuItem>
+          
+            ))
+          }
         </Select>
       </FormControl>
+    
+        </div>
+      )
 
+      case 1: return(
+         <div>
+          <h1>Contact Details</h1>
+          <TextField value={resumeDetails.email} onChange={(e)=>setresumeDetails({...resumeDetails,email:e.target.value})} sx={{width:'750px'}} id="outlined-basic" label="Email" variant="standard" width='200px' /> <br />
+        <TextField value={resumeDetails.contactNumber} onChange={(e)=>setresumeDetails({...resumeDetails,contactNumber:e.target.value})} sx={{width:'750px'}} id="filled-basic" label="Contact Number" variant="standard" /> <br />
+        <TextField value={resumeDetails.linkedin} onChange={(e)=>setresumeDetails({...resumeDetails,linkedin:e.target.value})} sx={{width:'750px'}}  id="standard-basic" label="Linkedin Link" variant="standard" />
+        <TextField value={resumeDetails.github} onChange={(e)=>setresumeDetails({...resumeDetails,github:e.target.value})} sx={{width:'750px'}}  id="standard-basic" label="Github Link" variant="standard" />
+        </div>
+      )
 
-      </Box>
+      case 2: return(
+         <div>
+          <h1>Education Details</h1>
+          <TextField value={resumeDetails.degree} onChange={(e)=>setresumeDetails({...resumeDetails,degree:e.target.value})} sx={{width:'750px'}} id="outlined-basic" label="Bachelors Degree" variant="standard" width='200px' /> <br />
+        <TextField value={resumeDetails.college} onChange={(e)=>setresumeDetails({...resumeDetails,college:e.target.value})} sx={{width:'750px'}} id="filled-basic" label="College/University Name" variant="standard" /> <br />
+        <TextField value={resumeDetails.year} onChange={(e)=>setresumeDetails({...resumeDetails,year:e.target.value})} sx={{width:'750px'}}  id="standard-basic" label="Year Of Graduation" variant="standard" />
+        </div>
+      )
 
-          </div>
-        )
-        case 1: return(
-          <div>
-            <h1>Contact details</h1>
-             <Box
-      component="form"
-      sx={{ '& > :not(style)': { m: 1, width: '25ch',display:'flex', flexDirection:'column' } }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField value={resumeDetails.email} onChange={(e)=>setresumeDetails({...resumeDetails,email:e.target.value})} id="standard-basic" label="Email" variant="standard" />
-      <TextField value={resumeDetails.contactNumber} onChange={(e)=>setresumeDetails({...resumeDetails,contactNumber:e.target.value})} id="standard-basic" label="Contact Number" variant="standard" />
-      <TextField value={resumeDetails.github} onChange={(e)=>setresumeDetails({...resumeDetails,github:e.target.value})} id="standard-basic" label="Github Link" variant="standard" />
+      case 3: return(
+         <div>
+          <p>Our AI will generate skills & summary according to your job role.</p>
+        </div>
+      )
+      default:return(
+        null
+      )
 
+   }
 
-      </Box>
+  }
 
-          </div>
-        )
-        case 2: return(
-          <div>
-            <h1>Education Details</h1>
-             <Box
-      component="form"
-      sx={{ '& > :not(style)': { m: 1, width: '25ch',display:'flex', flexDirection:'column' } }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField value={resumeDetails.degree} onChange={(e)=>setresumeDetails({...resumeDetails,degree:e.target.value})} id="standard-basic" label="Bachelors Degree" variant="standard" />
-      <TextField value={resumeDetails.college} onChange={(e)=>setresumeDetails({...resumeDetails,college:e.target.value})} id="standard-basic" label="College/University Name" variant="standard" />
-      <TextField value={resumeDetails.year} onChange={(e)=>setresumeDetails({...resumeDetails,year:e.target.value})} id="standard-basic" label="Year of Graduation" variant="standard" />
+  const handleSkillsAndSummay = ()=>{
+      setresumeDetails({...resumeDetails,skills:jobSkills[resumeDetails.jobTitle],summary:summaries[resumeDetails.jobTitle]})
+      handleNext()
+  }
 
-
-      </Box>
-
-          </div>
-        )
-        case 3: return(
-          <div>
-            <p>Our Ai will generate skills & summary according to 
-              your job role.Once the form get submitted,user won`t get the 
-              Chance to update resume details. If you want to proceed please click 
-              the <Typography component="span" sx={{ fontWeight: 'bold' }}>
-              Generate AI Skill & Summary
-              </Typography> button to submit.
-            </p>
-          </div>
-        )
-        default: return(
-          null
-        )
+  const handleAddResume = async()=>{
+    try {
+      const response = await addResumeAPI(resumeDetails)
+      console.log(response);
+      if(response.status === 201)
+      {
+        alert('resume added successfully')
+        const resumeId = response.data.id
+        setTimeout(()=>{
+            navigate(`/resume/${resumeId}`)
+        },2000)
+      }
+      
+    } 
+    catch (err) 
+    {
+      console.log(err);
+      
     }
   }
+
+
   return (
-     <Box sx={{ width: '100%' }}>
+  <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -205,14 +215,14 @@ const ResumeInput = ({setresumeDetails,resumeDetails}) => {
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset} ref={resetButtonRef}>
-              Finish
+            <Button onClick={handleAddResume} ref={resetButtonRef}>
+             Finish
             </Button>
           </Box>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Typography sx={{ mt: 2, mb: 1 }}>Step  {activeStep + 1}</Typography>
           <Box>
             {
               renderStepsContent(activeStep)
@@ -233,12 +243,12 @@ const ResumeInput = ({setresumeDetails,resumeDetails}) => {
                 Skip
               </Button>
             )}
-            <Box  >
+            <Box>
               {activeStep === steps.length - 1 ?
-              <Button>
-               GENERATE AI SKILLS AND SUMMARY
+              <Button onClick={handleSkillsAndSummay}>
+                Generate AI Skills and Summary
               </Button>
-             :  <Button onClick={handleNext} ref={nextButtonRef}>
+               : <Button onClick={handleNext} ref={nextButtonRef}>
                 Next
               </Button>}
             </Box>
@@ -246,7 +256,5 @@ const ResumeInput = ({setresumeDetails,resumeDetails}) => {
         </React.Fragment>
       )}
     </Box>
-  );
-};
-
-export default ResumeInput;
+  )
+}

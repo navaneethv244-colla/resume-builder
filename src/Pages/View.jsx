@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Preview from '../Components/Preview'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
@@ -10,11 +10,26 @@ import HomeIcon from '@mui/icons-material/Home';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Edit from '../Components/Edit';
+import { viewResumeAPI } from '../services/apiServices';
 
 
 const View = () => {
+  const {id} = useParams()
+  const getResume = async(id)=>{
+    try{
+      const res = await viewResumeAPI(id)
+      console.log(res);
+      
+    }
+    catch(err){
+      console.log(err);
+      
+    }
+  }
+  useEffect(()=>{
+    getResume(id)
+  },[id])
   return (
-    
     <Box sx={{
       width: '100%',
       minHeight: '100vh',
